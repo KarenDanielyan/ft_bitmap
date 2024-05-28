@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 01:29:12 by kdaniely          #+#    #+#             */
-/*   Updated: 2024/05/29 03:39:04 by kdaniely         ###   ########.fr       */
+/*   Updated: 2024/05/29 03:47:56 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,8 @@ void		ft_save_bitmap(const char *filename, t_ftbitmap *bitmap);
 
 static inline uint32_t	ft_bitmap_get_stride(t_ftbitmap *bitmap)
 {
-	return ((((bitmap->ih.biWidth * bitmap->ih.biBitCount) + 31) & ~31) >> 3);
+	return (\
+		(((bitmap->ih.bi_width * bitmap->ih.bi_bit_count) + 31) & ~31) >> 3);
 }
 
 static inline unsigned char	*ft_bitmap_get_pixel(t_ftbitmap *bitmap, \

@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 02:04:46 by kdaniely          #+#    #+#             */
-/*   Updated: 2024/05/29 03:22:57 by kdaniely         ###   ########.fr       */
+/*   Updated: 2024/05/29 03:47:15 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,20 @@ t_ftbitmap	*ft_load_bitmap(const char *filename)
 		return (NULL);
 	bitmap = (t_ftbitmap *)malloc(sizeof(t_ftbitmap));
 	if (!bitmap)
+	{
+		close(fd);
 		return (NULL);
+	}
 	read(fd, &bitmap->fh, sizeof(struct s_bfheader));
 	read(fd, &bitmap->ih, sizeof(struct s_biheader));
-	bitmap->data = (unsigned char *)malloc(bitmap->ih.biSizeImage);
+	bitmap->data = (unsigned char *)malloc(bitmap->ih.bi_size_image);
 	if (!bitmap->data)
 	{
 		free(bitmap);
+		close(fd);
 		return (NULL);
 	}
-	read(fd, bitmap->data, bitmap->ih.biSizeImage);
+	read(fd, bitmap->data, bitmap->ih.bi_size_image);
 	close(fd);
 	return (bitmap);
 }
