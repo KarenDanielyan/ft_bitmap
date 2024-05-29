@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 02:28:19 by kdaniely          #+#    #+#             */
-/*   Updated: 2024/05/29 03:45:56 by kdaniely         ###   ########.fr       */
+/*   Updated: 2024/05/29 21:41:03 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,28 +17,19 @@ static void	fill_file_header(t_ftbitmap *bitmap, \
 static void	fill_info_header(t_ftbitmap *bitmap, \
 	uint32_t width, uint32_t height);
 
-t_ftbitmap	*ft_create_bitmap(const char *filename, \
-	uint32_t width, uint32_t height)
+t_ftbitmap	*ft_create_bitmap(uint32_t width, uint32_t height)
 {
 	t_ftbitmap	*bitmap;
-	int			fd;
 
-	fd = open(filename, O_WRONLY | O_CREAT, O_TRUNC, 0644);
-	if (fd == -1)
-		return (NULL);
 	bitmap = (t_ftbitmap *)malloc(sizeof(t_ftbitmap));
 	if (!bitmap)
-	{
-		close(fd);
 		return (NULL);
-	}
 	fill_file_header(bitmap, width, height);
 	fill_info_header(bitmap, width, height);
 	bitmap->data = (unsigned char *)malloc(bitmap->ih.bi_size_image);
 	if (!bitmap->data)
 	{
 		free(bitmap);
-		close(fd);
 		return (NULL);
 	}
 	memset(bitmap->data, 255, bitmap->ih.bi_size_image);
@@ -67,7 +58,7 @@ static void	fill_info_header(t_ftbitmap *bitmap, \
 	bitmap->ih.bi_planes = FT_BITMAP_PLANES;
 	bitmap->ih.bi_bit_count = FT_BITMAP_BITS_PER_PIXEL;
 	bitmap->ih.bi_compression = BI_RGB;
-	bitmap->ih.bi_size_image = (-height) * ft_bitmap_get_stride(bitmap);
+	bitmap->ih.bi_size_image = height * ft_bitmap_get_stride(bitmap);
 	bitmap->ih.bi_x_pels_per_meter = FT_BITMAP_X_PIXELS_PER_METER;
 	bitmap->ih.bi_y_pels_per_meter = FT_BITMAP_Y_PIXELS_PER_METER;
 	bitmap->ih.bi_clr_used = 0;
