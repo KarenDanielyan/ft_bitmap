@@ -12,6 +12,7 @@ It supports both BMP v3 and BMP v5 specifications.
 ### Bitmap Storage
 The established bitmap file format consists of a BITMAPFILEHEADER structure followed by a BITMAPINFOHEADER, BITMAPV4HEADER, or BITMAPV5HEADER structure, followed by the data segment shown in the following diagram.
 ![Bitmap Layout](resources/BMP_Layout.svg)
+
 In our case we only support BITMAPINFOHEADER and BITMAPV5HEADER structures, and the data segment is stored in a single contiguous block of memory. In ft_bitmap, bitmap structure is defined as follows:
 ```c
 typedef struct s_ftbitmap
