@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 01:29:12 by kdaniely          #+#    #+#             */
-/*   Updated: 2024/05/29 21:38:53 by kdaniely         ###   ########.fr       */
+/*   Updated: 2024/05/30 00:22:21 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,10 @@ typedef struct s_bfheader	t_bfheader;
 typedef struct s_biheader	t_biheader;
 typedef struct s_biv5header	t_biv5header;
 
+/**
+ * @brief	The BITMAPFILEHEADER structure.
+ * 
+ */
 struct s_bfheader
 {
 	uint8_t		bf_type[2];
@@ -51,6 +55,11 @@ struct s_bfheader
 	uint32_t	bf_off_bits;
 } __attribute__((packed));
 
+/**
+ * @brief	The BITMAPINFOHEADER structure.
+ * 			Refer to the Microsoft documentation for more information.
+ * 
+ */
 struct s_biheader
 {
 	uint32_t	bi_size;
@@ -66,18 +75,11 @@ struct s_biheader
 	uint32_t	bi_clr_important;
 } __attribute__((packed));
 
-/*
-  DWORD        bV5CSType;
-  CIEXYZTRIPLE bV5Endpoints;
-  DWORD        bV5GammaRed;
-  DWORD        bV5GammaGreen;
-  DWORD        bV5GammaBlue;
-  DWORD        bV5Intent;
-  DWORD        bV5ProfileData;
-  DWORD        bV5ProfileSize;
-  DWORD        bV5Reserved;
-*/
-
+/**
+ * @brief	The BITMAPV5HEADER structure.
+ * 			It only contains the fields that are missing in BITMAPINFOHEADER.
+ * 			Refer to the Microsoft documentation for more information.
+ */
 struct s_biv5header
 {
 	uint32_t	bi_red_mask;
@@ -95,6 +97,16 @@ struct s_biv5header
 	uint32_t	bi_reserved;
 } __attribute__((packed));
 
+/**
+ * @brief	This is the bitmap structure for ft_bitmap API.
+ * 			It contains the bitmap file header, info header, 
+ * 			and the bitmap data.
+ * 			We support both BITMAPINFOHEADER and BITMAPV5HEADER,
+ * 			but in @ref t_biv5header, are only the fields 
+ * 			that are missing in @ref t_biheader.
+ * 			Note that this structure is packed to avoid padding.
+ * 
+ */
 struct s_ftbitmap
 {
 	t_bfheader			fh;
@@ -103,20 +115,59 @@ struct s_ftbitmap
 	unsigned char		*data;
 } __attribute__((packed));
 
+/**
+ * @brief	ft_load_bitmap() loads v3 or v5 bitmap into memory.
+ * 
+ * @param filename		The path to the bitmap file.
+ * @return t_ftbitmap*	Returns a pointer to the ft_bitmap structure.
+ */
 t_ftbitmap	*ft_load_bitmap(const char *filename);
 
+/**
+ * @brief				ft_create_bitmap() creates a new v3 bitmap structure.
+ * 						It fills the data field with white pixels.
+ * 
+ * @param width			Width of the bitmap.
+ * @param height		Height of the bitmap.
+ * @return t_ftbitmap*	Returns a pointer to the ft_bitmap structure.
+ */
 t_ftbitmap	*ft_create_bitmap(uint32_t width, uint32_t height);
 
+/**
+ * @brief			ft_save_bitmap() saves the bitmap structure to a file.
+ * 
+ * @param bitmap	Pointer to the ft_bitmap structure to be saved.
+ * @param filename	The path to the file where the bitmap will be saved.
+ * @return int		Returns 0 if the bitmap was saved successfully, otherwise -1.
+ */
 int			ft_save_bitmap(t_ftbitmap *bitmap, const char *filename);
 
+/**
+ * @brief			ft_destroy_bitmap() frees the memory 
+ * 					allocated for the bitmap.
+ * 
+ * @param bitmap	Pointer to the ft_bitmap structure to be freed.
+ */
 void		ft_destroy_bitmap(t_ftbitmap *bitmap);
 
+/**
+ * @brief			ft_bitmap_get_stride() calculates the stride of the bitmap.
+ * 					The stride is the number of bytes in a row of the bitmap,
+ * 					including padding.
+ * 
+ * @param bitmap	Pointer to the ft_bitmap structure.
+ * @return uint32_t	Returns the stride of the bitmap.
+ */
 static inline uint32_t	ft_bitmap_get_stride(t_ftbitmap *bitmap)
 {
 	return (\
 		(((bitmap->ih.bi_width * bitmap->ih.bi_bit_count) + 31) & ~31) >> 3);
 }
 
+/**
+ * @brief		ft_bitmap_get_pixel() returns a pointer to the pixel at (x, y).
+ * 
+ */
 static inline unsigned char	*ft_bitmap_get_pixel(t_ftbitmap *bitmap, \
 	uint32_t x, uint32_t y)
 {
