@@ -1,3 +1,7 @@
 .vscode
 *.o
 *.a
+*.bmp
+test
+*.hex
+result.bmp

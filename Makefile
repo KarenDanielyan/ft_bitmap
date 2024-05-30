@@ -3,7 +3,8 @@ NAME		=	libftbitmap.a
 DEP			= 	ft_bitmap.h Makefile
 
 SOURCES		= 	ft_create_bitmap.c ft_load_bitmap.c ft_save_bitmap.c \
-				ft_destroy_bitmap.c
+				ft_destroy_bitmap.c ft_bitmap_set_pixel.c \
+				ft_create_bitmap_from_data.c
 
 OBJS		=	$(patsubst %.c, $(BUILD)/%.o, $(SOURCES))
 
@@ -13,7 +14,7 @@ CC			=	cc
 
 RM			=	rm -rf
 
-CFLAGS		=	-Wall -Wextra -Werror
+CFLAGS		=	-Wall -Wextra -Werror -g3 -fsanitize=address
 
 AR			=	ar rcs
 
@@ -37,6 +38,9 @@ $(NAME):	$(BUILD) $(OBJS)
 $(BUILD):
 			@mkdir $(BUILD)
 
+demo: 		$(NAME)
+			@$(CC) $(CFLAGS) test.c -I. -L. -lftbitmap $(NAME) -o test
+
 clean:		
 				@echo "${YELLOW}Cleaning build${RESET}"
 				@$(RM) $(BUILD)
@@ -48,4 +52,4 @@ fclean:
 
 re:			fclean $(NAME)
 
-.PHONY:		all bonus clean fclean re
+.PHONY:		all bonus clean fclean re demo

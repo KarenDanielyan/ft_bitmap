@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 01:29:12 by kdaniely          #+#    #+#             */
-/*   Updated: 2024/05/30 14:50:13 by kdaniely         ###   ########.fr       */
+/*   Updated: 2024/05/31 02:48:53 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,7 +136,7 @@ t_ftbitmap	*ft_create_bitmap(uint32_t width, uint32_t height);
 /**
  * @brief				ft_create_bitmap_from_data() creates a bitmap using
  * 						the provided pixel data.
- * 							- The data must be in BGR format.
+ * 							- The data must be in BGRA format.
  * 							- The data does not contain padding.
  */
 t_ftbitmap	*ft_create_bitmap_from_data(uint32_t width, uint32_t height, \
@@ -160,6 +160,16 @@ int			ft_save_bitmap(t_ftbitmap *bitmap, const char *filename);
 void		ft_destroy_bitmap(t_ftbitmap *bitmap);
 
 /**
+ * @brief		ft_bitmap_set_pixel() sets the pixel at (x, y) to the color.
+ * 					- The color must be in ARGB format (little endian) or 
+ * 					BGRA (big endian).
+ * 					- The bitmap must be 24 or 32 bits per pixel.
+ * 					- In case of 24 bits per pixel, the alpha channel is ignored.
+ */
+void		ft_bitmap_set_pixel(t_ftbitmap *bitmap, uint32_t x, uint32_t y, \
+	unsigned int color);
+
+/**
  * @brief			ft_bitmap_get_stride() calculates the stride of the bitmap.
  * 					The stride is the number of bytes in a row of the bitmap,
  * 					including padding.
@@ -181,7 +191,7 @@ static inline unsigned char	*ft_bitmap_get_pixel(t_ftbitmap *bitmap, \
 	uint32_t x, uint32_t y)
 {
 	return (bitmap->data + (y * ft_bitmap_get_stride(bitmap) + \
-		x * (bitmap->ih.bi_bit_count / sizeof(char))));
+		x * (bitmap->ih.bi_bit_count / 8)));
 }
 
 #endif
