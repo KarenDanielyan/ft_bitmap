@@ -74,8 +74,10 @@ Here is a list of implemented features:
 - [x] Create an empty bitmap with a specified width and height.
 - [x] Get the pixel address at a specified position.
 - [x] Free the bitmap memory.
+- [x] Set the pixel color at a specified position.
 - [ ] Get the pixel color at a specified position.
-- [ ] Set the pixel color at a specified position.
+- [ ] Full support for BMP v5 header.
+- [ ] Suite of image processing functions.
 
 ## Installation
 
@@ -135,3 +137,6 @@ int main(void)
 - `uint32_t ft_bitmap_get_stride(const t_ftbitmap *bitmap);`
 	- Returns the number of bytes in a row of the bitmap.
 	- Stride is the number of bytes needed to store a row of pixels in memory, including the padding.
+- `void ft_bitmap_set_pixel(t_ftbitmap *bitmap, uint32_t x, uint32_t y, unsigned int color);`
+	- Sets the color of the pixel at the specified position.
+	- The color is represented as an integer in the order ARGB.
