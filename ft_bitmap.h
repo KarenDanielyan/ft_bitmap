@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 01:29:12 by kdaniely          #+#    #+#             */
-/*   Updated: 2024/05/30 00:22:21 by kdaniely         ###   ########.fr       */
+/*   Updated: 2024/05/30 14:50:13 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,6 +132,15 @@ t_ftbitmap	*ft_load_bitmap(const char *filename);
  * @return t_ftbitmap*	Returns a pointer to the ft_bitmap structure.
  */
 t_ftbitmap	*ft_create_bitmap(uint32_t width, uint32_t height);
+
+/**
+ * @brief				ft_create_bitmap_from_data() creates a bitmap using
+ * 						the provided pixel data.
+ * 							- The data must be in BGR format.
+ * 							- The data does not contain padding.
+ */
+t_ftbitmap	*ft_create_bitmap_from_data(uint32_t width, uint32_t height, \
+	unsigned char *data);
 
 /**
  * @brief			ft_save_bitmap() saves the bitmap structure to a file.

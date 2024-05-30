@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 02:28:19 by kdaniely          #+#    #+#             */
-/*   Updated: 2024/05/29 21:41:03 by kdaniely         ###   ########.fr       */
+/*   Updated: 2024/05/30 14:53:24 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,32 @@ t_ftbitmap	*ft_create_bitmap(uint32_t width, uint32_t height)
 		return (NULL);
 	}
 	memset(bitmap->data, 255, bitmap->ih.bi_size_image);
+	return (bitmap);
+}
+
+t_ftbitmap	*ft_create_bitmap_from_data(uint32_t width, uint32_t height, \
+	unsigned char *data)
+{
+	t_ftbitmap	*bitmap;
+	uint32_t	i;
+	uint32_t	j;
+
+	i = 0;
+	j = 0;
+	bitmap = (t_ftbitmap *)malloc(sizeof(t_ftbitmap));
+	if (!bitmap)
+		return (NULL);
+	fill_file_header(bitmap, width, height);
+	fill_info_header(bitmap, width, height);
+	while (i < height * FT_BITMAP_BYTES_PER_PIXEL)
+	{
+		j = 0;
+		while (j < width * FT_BITMAP_BYTES_PER_PIXEL)
+		{
+			*ft_bitmap_get_pixel(bitmap, j, i) = *(data + i * width + j);
+			j ++;
+		}
+	}
 	return (bitmap);
 }
 
