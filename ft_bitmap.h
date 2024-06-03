@@ -6,14 +6,14 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 01:29:12 by kdaniely          #+#    #+#             */
-/*   Updated: 2024/05/31 02:48:53 by kdaniely         ###   ########.fr       */
+/*   Updated: 2024/06/03 15:02:25 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_BITMAP_H
 # define FT_BITMAP_H
 
-# include <malloc.h>
+# include <stdlib.h>
 # include <string.h>
 # include <stdint.h>
 # include <unistd.h>
