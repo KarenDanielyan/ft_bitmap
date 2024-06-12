@@ -4,7 +4,8 @@ DEP			= 	ft_bitmap.h Makefile
 
 SOURCES		= 	ft_create_bitmap.c ft_load_bitmap.c ft_save_bitmap.c \
 				ft_destroy_bitmap.c ft_bitmap_properties.c \
-				ft_create_bitmap_from_data.c
+				ft_create_bitmap_from_data.c \
+				ft_bitmap_get_pixel_color.c
 
 OBJS		=	$(patsubst %.c, $(BUILD)/%.o, $(SOURCES))
 
@@ -14,7 +15,7 @@ CC			=	cc
 
 RM			=	rm -rf
 
-CFLAGS		=	-Wall -Wextra -Werror -g3 -fsanitize=address
+CFLAGS		=	-Wall -Wextra -Werror
 
 AR			=	ar rcs
 

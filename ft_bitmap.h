@@ -6,14 +6,14 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 01:29:12 by kdaniely          #+#    #+#             */
-/*   Updated: 2024/06/12 16:33:05 by kdaniely         ###   ########.fr       */
+/*   Updated: 2024/06/12 16:34:50 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_BITMAP_H
 # define FT_BITMAP_H
 
-# include <malloc.h>
+# include <stdlib.h>
 # include <string.h>
 # include <stdint.h>
 # include <unistd.h>
@@ -24,6 +24,7 @@
 # define BITMAP_FILE_HEADER_SIZE 14
 # define BITMAP_INFO_HEADER_SIZE 40
 # define BITMAP_HEADER_SIZE 54
+# define BITMAP_V5HEADER_SIZE 138
 
 # define BI_RGB 0
 
@@ -165,6 +166,9 @@ void			ft_destroy_bitmap(t_ftbitmap *bitmap);
  * 				or no bitmap file is specified.
  */
 unsigned char	*ft_bitmap_get_pixel(t_ftbitmap *bitmap, \
+	uint32_t x, uint32_t y);
+
+uint32_t	ft_bitmap_get_pixel_color(t_ftbitmap *bitmap, \
 	uint32_t x, uint32_t y);
 
 /**
