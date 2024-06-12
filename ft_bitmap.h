@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 01:29:12 by kdaniely          #+#    #+#             */
-/*   Updated: 2024/06/12 16:34:50 by kdaniely         ###   ########.fr       */
+/*   Updated: 2024/06/12 18:40:46 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,11 +164,13 @@ void			ft_destroy_bitmap(t_ftbitmap *bitmap);
  * @brief		ft_bitmap_get_pixel() returns a pointer to the pixel at (x, y).
  * 				It will return NULL if the coordinates are out of bounds
  * 				or no bitmap file is specified.
+ * 				NOTE: If negative coordinates are provided, the function will
+ * 				look for the pixel in the opposite direction.
  */
 unsigned char	*ft_bitmap_get_pixel(t_ftbitmap *bitmap, \
-	uint32_t x, uint32_t y);
+	int32_t x, int32_t y);
 
-uint32_t	ft_bitmap_get_pixel_color(t_ftbitmap *bitmap, \
+uint32_t		ft_bitmap_get_pixel_color(t_ftbitmap *bitmap, \
 	uint32_t x, uint32_t y);
 
 /**
