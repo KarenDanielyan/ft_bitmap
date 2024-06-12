@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 01:29:12 by kdaniely          #+#    #+#             */
-/*   Updated: 2024/05/31 02:48:53 by kdaniely         ###   ########.fr       */
+/*   Updated: 2024/06/12 16:33:05 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ struct s_ftbitmap
  * @param filename		The path to the bitmap file.
  * @return t_ftbitmap*	Returns a pointer to the ft_bitmap structure.
  */
-t_ftbitmap	*ft_load_bitmap(const char *filename);
+t_ftbitmap		*ft_load_bitmap(const char *filename);
 
 /**
  * @brief				ft_create_bitmap() creates a new v3 bitmap structure.
@@ -131,7 +131,7 @@ t_ftbitmap	*ft_load_bitmap(const char *filename);
  * @param height		Height of the bitmap.
  * @return t_ftbitmap*	Returns a pointer to the ft_bitmap structure.
  */
-t_ftbitmap	*ft_create_bitmap(uint32_t width, uint32_t height);
+t_ftbitmap		*ft_create_bitmap(uint32_t width, uint32_t height);
 
 /**
  * @brief				ft_create_bitmap_from_data() creates a bitmap using
@@ -139,7 +139,7 @@ t_ftbitmap	*ft_create_bitmap(uint32_t width, uint32_t height);
  * 							- The data must be in BGRA format.
  * 							- The data does not contain padding.
  */
-t_ftbitmap	*ft_create_bitmap_from_data(uint32_t width, uint32_t height, \
+t_ftbitmap		*ft_create_bitmap_from_data(uint32_t width, uint32_t height, \
 	unsigned char *data);
 
 /**
@@ -149,7 +149,7 @@ t_ftbitmap	*ft_create_bitmap_from_data(uint32_t width, uint32_t height, \
  * @param filename	The path to the file where the bitmap will be saved.
  * @return int		Returns 0 if the bitmap was saved successfully, otherwise -1.
  */
-int			ft_save_bitmap(t_ftbitmap *bitmap, const char *filename);
+int				ft_save_bitmap(t_ftbitmap *bitmap, const char *filename);
 
 /**
  * @brief			ft_destroy_bitmap() frees the memory 
@@ -157,7 +157,15 @@ int			ft_save_bitmap(t_ftbitmap *bitmap, const char *filename);
  * 
  * @param bitmap	Pointer to the ft_bitmap structure to be freed.
  */
-void		ft_destroy_bitmap(t_ftbitmap *bitmap);
+void			ft_destroy_bitmap(t_ftbitmap *bitmap);
+
+/**
+ * @brief		ft_bitmap_get_pixel() returns a pointer to the pixel at (x, y).
+ * 				It will return NULL if the coordinates are out of bounds
+ * 				or no bitmap file is specified.
+ */
+unsigned char	*ft_bitmap_get_pixel(t_ftbitmap *bitmap, \
+	uint32_t x, uint32_t y);
 
 /**
  * @brief		ft_bitmap_set_pixel() sets the pixel at (x, y) to the color.
@@ -166,7 +174,7 @@ void		ft_destroy_bitmap(t_ftbitmap *bitmap);
  * 					- The bitmap must be 24 or 32 bits per pixel.
  * 					- In case of 24 bits per pixel, the alpha channel is ignored.
  */
-void		ft_bitmap_set_pixel(t_ftbitmap *bitmap, uint32_t x, uint32_t y, \
+void			ft_bitmap_set_pixel(t_ftbitmap *bitmap, uint32_t x, uint32_t y, \
 	unsigned int color);
 
 /**
@@ -182,16 +190,4 @@ static inline uint32_t	ft_bitmap_get_stride(t_ftbitmap *bitmap)
 	return (\
 		(((bitmap->ih.bi_width * bitmap->ih.bi_bit_count) + 31) & ~31) >> 3);
 }
-
-/**
- * @brief		ft_bitmap_get_pixel() returns a pointer to the pixel at (x, y).
- * 
- */
-static inline unsigned char	*ft_bitmap_get_pixel(t_ftbitmap *bitmap, \
-	uint32_t x, uint32_t y)
-{
-	return (bitmap->data + (y * ft_bitmap_get_stride(bitmap) + \
-		x * (bitmap->ih.bi_bit_count / 8)));
-}
-
 #endif

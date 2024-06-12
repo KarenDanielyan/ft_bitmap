@@ -3,7 +3,7 @@ NAME		=	libftbitmap.a
 DEP			= 	ft_bitmap.h Makefile
 
 SOURCES		= 	ft_create_bitmap.c ft_load_bitmap.c ft_save_bitmap.c \
-				ft_destroy_bitmap.c ft_bitmap_set_pixel.c \
+				ft_destroy_bitmap.c ft_bitmap_properties.c \
 				ft_create_bitmap_from_data.c
 
 OBJS		=	$(patsubst %.c, $(BUILD)/%.o, $(SOURCES))
