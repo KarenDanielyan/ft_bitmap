@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 15:37:57 by kdaniely          #+#    #+#             */
-/*   Updated: 2024/06/12 16:33:14 by kdaniely         ###   ########.fr       */
+/*   Updated: 2024/06/12 16:46:41 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,7 @@ unsigned char	*ft_bitmap_get_pixel(t_ftbitmap *bitmap, uint32_t x, uint32_t y)
 	pixel = NULL;
 	if (bitmap)
 	{
-		if ((int32_t)x < bitmap->ih.bi_width && x > 0 && \
-			(int32_t)y < bitmap->ih.bi_height && y > 0)
+		if ((int32_t)x < bitmap->ih.bi_width && (int32_t)y < bitmap->ih.bi_height)
 			pixel = bitmap->data + (y * ft_bitmap_get_stride(bitmap) + \
 			x * (bitmap->ih.bi_bit_count / 8));
 	}
