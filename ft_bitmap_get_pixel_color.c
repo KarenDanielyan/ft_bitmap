@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 17:34:15 by kdaniely          #+#    #+#             */
-/*   Updated: 2024/06/12 19:32:09 by kdaniely         ###   ########.fr       */
+/*   Updated: 2024/06/13 21:44:20 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ uint32_t	ft_bitmap_get_pixel_color(t_ftbitmap *bitmap, \
 
 	color = 0;
 	pixel = (uint32_t *)ft_bitmap_get_pixel(bitmap, x, y);
-	if (bitmap->fh.bf_off_bits == BITMAP_V5HEADER_SIZE)
+	if (pixel && bitmap->fh.bf_off_bits == BITMAP_V5HEADER_SIZE)
 	{
 		color = bitmap->v5ih.bi_blue_mask & *pixel;
 		color |= get_byte_color(*pixel, bitmap->v5ih.bi_green_mask) << 8;
