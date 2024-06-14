@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 17:34:15 by kdaniely          #+#    #+#             */
-/*   Updated: 2024/06/13 21:44:20 by kdaniely         ###   ########.fr       */
+/*   Updated: 2024/06/14 16:59:28 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ uint32_t	get_byte_color(uint32_t rgb, uint32_t channel_mask)
 
 // ARGB format;
 uint32_t	ft_bitmap_get_pixel_color(t_ftbitmap *bitmap, \
-	uint32_t x, uint32_t y)
+	int32_t x, int32_t y)
 {
 	uint32_t	*pixel;
 	uint32_t	color;

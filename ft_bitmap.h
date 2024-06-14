@@ -6,7 +6,7 @@
 /*   By: kdaniely <kdaniely@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 01:29:12 by kdaniely          #+#    #+#             */
-/*   Updated: 2024/06/12 18:40:46 by kdaniely         ###   ########.fr       */
+/*   Updated: 2024/06/14 16:59:48 by kdaniely         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,7 +171,7 @@ unsigned char	*ft_bitmap_get_pixel(t_ftbitmap *bitmap, \
 	int32_t x, int32_t y);
 
 uint32_t		ft_bitmap_get_pixel_color(t_ftbitmap *bitmap, \
-	uint32_t x, uint32_t y);
+	int32_t x, int32_t y);
 
 /**
  * @brief		ft_bitmap_set_pixel() sets the pixel at (x, y) to the color.
